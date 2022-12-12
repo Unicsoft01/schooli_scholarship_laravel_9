@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ScholarshipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // Route::get('/dashboard', function () {
@@ -36,6 +38,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route::post('/contact/Store', 'ContactStore')->name('contact.store');
     });
 
+    Route::resource('Scholarship', ScholarshipController::class);
+    Route::resource('Applications', ApplicationsController::class);
+
+    Route::controller(ApplicationsController::class)->group(function (){
+        Route::get('Applications/createApp/{id}', 'CreateApplication')->name('app.create');
+        Route::get('myApps', 'MyApplications')->name('my.applications');
+        // Route::post('/contact/Store', 'ContactStore')->name('contact.store');
+    });
 
 
 });

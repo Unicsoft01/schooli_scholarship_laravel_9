@@ -1,60 +1,108 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@php
+    $site = App\Models\Settings::find(1);
+@endphp
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ url('/') }}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@themepixels">
+    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Starlight">
+    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="twitter:image" content="http://themepixels.me/starlight/img/starlight-social.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://themepixels.me/starlight">
+    <meta property="og:title" content="Starlight">
+    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+    <meta property="og:image" content="http://themepixels.me/starlight/img/starlight-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/starlight/img/starlight-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="author" content="ThemePixels">
+
+    <title>Register </title>
+
+    <!-- vendor css -->
+    <link href="{{ url('/') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ url('/') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="{{ url('/') }}/lib/select2/css/select2.min.css" rel="stylesheet">
+
+
+    <!-- Starlight CSS -->
+    <link rel="stylesheet" href="{{ url('/') }}/css/starlight.css">
+  </head>
+
+  <body>
+
+    <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-md-100v">
+
+      <div class="login-wrapper wd-300 wd-xs-400 pd-25 pd-xs-40 bg-white">
+        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">{{ $site->site_name }}</div>
+        {{-- <div class="tx-center mg-b-60">Professional Admin Template Design</div> --}}
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
-            <!-- Name -->
-            <div>
-                <x-input-label for="name" :value="__('Name')" />
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" :value="old('name')" required autofocus  class="form-control" placeholder="Enter your full name">
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
+            <!-- form-group -->
+        <div class="form-group">
+            <label for="name">Email</label>
+            <input type="email" name="email" :value="old('email')" required  class="form-control" placeholder="Enter a Valid Email">
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+        <!-- form-group -->
+        <div class="form-group">
+            <label for="name">Password</label>
+            <input type="password"
+            name="password"
+            required autocomplete="new-password"  class="form-control" placeholder="Choose a password">
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+        <!-- form-group -->
+        <div class="form-group">
+            <label for="name">Comfirm Password</label>
+            <input id="password_confirmation" type="password"
+            name="password_confirmation" required  class="form-control" placeholder="Choose a password">
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+        <!-- form-group -->
+        
+        
+        <div class="form-group tx-12">By clicking the Sign Up button below, you agreed to our privacy policy and terms of use of our website.</div>
+        <button type="submit"  style="background: indigo;"  class="btn btn-info btn-block">Sign Up</button>
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-primary-button class="ml-4">
-                    {{ __('Register') }}
-                </x-primary-button>
-            </div>
+        <div class="mg-t-40 tx-center">Already have an account? <a href="{{ route('login') }}" class="tx-info">Sign In</a></div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </div><!-- login-wrapper -->
+    </div><!-- d-flex -->
+
+    <script src="{{ url('/') }}/lib/jquery/jquery.js"></script>
+    <script src="{{ url('/') }}/lib/popper.js/popper.js"></script>
+    <script src="{{ url('/') }}/lib/bootstrap/bootstrap.js"></script>
+    <script src="{{ url('/') }}/lib/select2/js/select2.min.js"></script>
+    <script>
+      $(function(){
+        'use strict';
+
+        $('.select2').select2({
+          minimumResultsForSearch: Infinity
+        });
+      });
+    </script>
+
+  </body>
+</html>
