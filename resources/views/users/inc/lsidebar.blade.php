@@ -23,7 +23,7 @@
     <a href="{{ route('Applications.index') }}" class="sl-menu-link @if(route('Applications.index')==url()->current()  || route('Applications.create')==url()->current()) active_ @endif">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-        <span class="menu-item-label">Scholarships</span>
+        <span class="menu-item-label">Programs</span>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
     <a href="#" class="sl-menu-link">

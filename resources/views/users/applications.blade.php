@@ -85,11 +85,11 @@
               <table id="datatable1" class="table table-hover table-striped table-responsive display responsive nowrap table-bordered table-indigo disabled">
                 <thead>
                   <tr>
-                    <th class="wd-35p">Scholarship</th>
+                    <th class="wd-35p">Program names</th>
                     <th class="wd-20p">Sponsor</th>
-                    <th class="wd-25p">Program Type</th>
-                    <th class="wd-10p">Reg. Fee</th>
-                    <th class="wd-5p">Slots</th>
+                    <th class="wd-25p">Sch. Type</th>
+                    <th class="wd-10p">Charge</th>
+                    <th class="wd-5p">Level</th>
                     <th class="wd-5p"></th>
                   </tr>
                 </thead>

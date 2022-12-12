@@ -57,7 +57,7 @@
           </div><!-- card-header -->
           <div class="d-flex align-items-center justify-content-between">
             <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-            <h3 class="mg-b-0 tx-white tx-lato tx-bold">${{ $Applications }}</h3>
+            <h3 class="mg-b-0 tx-white tx-lato tx-bold">$0</h3>
           </div><!-- card-body -->
           <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
             <div>
@@ -105,8 +105,8 @@
                   <td>{{ $scholarship->price }}</td>
                   <td>{{ $used }}/{{ $scholarship->slots }}</td>
                   <td>
-                    <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply" class="btn btn-outline-indigo    btn-icon rounded-circle btn-sm btn-small">
-                      <span class="p-1"><i class="fa fa-send"></i> </span>
+                    <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply" class="btn btn-indigo    btn-icon rounded-circle btn-sm btn-small">
+                      <span class="p-1">Apply </span>
                     </a>
                   </td>
                 </tr>
