@@ -105,8 +105,8 @@
                   <td>{{ $scholarship->price }}</td>
                   <td>{{ $used }}/{{ $scholarship->slots }}</td>
                   <td>
-                    <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply" class="btn btn-indigo    btn-icon rounded-circle btn-sm btn-small">
-                      <span class="p-1">Apply </span>
+                    <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply now" class="btn btn-indigo  p2   btn-sm btn-small">
+                      <span class="p-1">Apply Now </span>
                     </a>
                   </td>
                 </tr>

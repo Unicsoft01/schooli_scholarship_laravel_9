@@ -14,9 +14,12 @@ class Applications extends Model
         'payable',
         'pmt_status',
         'status',
+        'sch_name',
+        'sponsor',
+        'type',
     ];
 }
 	
-	
+
 	
 	

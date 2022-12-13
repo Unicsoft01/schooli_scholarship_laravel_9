@@ -1,7 +1,8 @@
 @php
     $pageTitle = "Apply for scholarship";
     $site = App\Models\Settings::find(1);
-  $scholarship = App\Models\Scholarship::find($id);
+    $scholarship = App\Models\Scholarship::find($id);
+    $requirements = App\Models\Requirements::latest()->whereSch_id($id)->get();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -76,64 +77,123 @@
         </div><!-- sl-page-title -->
 
 
-{{-- Full texts
-id	
-sch_id	
-user_id	
-payable	
-pmt_status	
-status	
-created_at	 --}}
+
+        <div class="card pd-20 pd-sm-40 mg-t-50">
+          {{-- <h6 class="card-body-title">Card with Buttons &amp; Options</h6>
+          <p class="mg-b-20 mg-sm-b-30">Cards with some options in the right corner of header of card.</p> --}}
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header card-header-default justify-content-between bg-gray-400">
+                  <h6 class="mg-b-0 tx-14 tx-inverse">Program Descriptions</h6>
+                </div><!-- card-header -->
+                <div class="card-body bg-gray-200">
+                  <p class="mg-b-0">{{ ucfirst($scholarship->about) }}</p>
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col-6 -->
+          </div><!-- row -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header card-header-default justify-content-between bg-gray-400">
+                  <h6 class="mg-b-0 tx-14 tx-inverse">Scholarship requirements</h6>
+                </div><!-- card-header -->
+                <div class="card-body bg-gray-200">
+                  <p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship based on the following requirements:</p>
+                  @foreach ($requirements as $requirement)
+                   <li class="mg-b-0">{{ ucfirst($requirement->requirements) }}</li>
+                  @endforeach
+                  {{-- <li class="mg-b-0">{{ ucfirst($scholarship->about) }}</li> --}}
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col-6 -->
+          </div><!-- row -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header card-header-default justify-content-between bg-gray-400">
+                  <h6 class="mg-b-0 tx-14 tx-inverse">Application requirements</h6>
+                </div><!-- card-header -->
+                <div class="card-body bg-gray-200">
+                  <p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship after paying an application fee of : <b>{{ ucfirst($scholarship->price) }}</b> to the following bank Account</p>
+                  {{-- @foreach ($requirements as $requirement)
+                   <li class="mg-b-0">{{ ucfirst($requirement->requirements) }}</li>
+                  @endforeach --}}
+                  {{-- <li class="mg-b-0">{{ ucfirst($scholarship->about) }}</li> --}}
+                  <h6>Bank name: UBA</h6>
+                  <h6>Acc. No. 2127678388</h6>
+                  <h6>Acc. Name. Muhammed Yakub</h6>
+                  <p class="text-danger">Please submit your evidence of payment during application, for verification purpose</p>
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col-6 -->
+          </div><!-- row -->
+        </div><!-- card -->
+
+
+          {{-- Full texts
+          id	
+          sch_id	
+          user_id	
+          payable	
+          pmt_status	
+          status	
+          created_at	 --}}
                 
 
-<div class="row row-sm mg-t-20">
-      <div class="col-12">
-        <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-          {{-- <h6 class="card-body-title"></h6> --}}
-          {{-- <p class="mg-b-20 mg-sm-b-30"></p> --}}
-      <form action="{{ route('Applications.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
-          <div class="row">
-            <label class="col-sm-4 form-control-label">Username: <span class="tx-danger">*</span></label>
-            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-              <input type="hidden" class="form-control" name="sch_id" value="{{ $scholarship->id }}">
-              <input type="text" readonly class="form-control" value="{{ Auth::User()->name }}">
-            </div>
-          </div><!-- row -->
-          <div class="row mg-t-20">
-            <label class="col-sm-4 form-control-label">Email: <span class="tx-danger">*</span></label>
-            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-              <input type="hidden" class="form-control" name="user_id" value="{{ Auth::User()->id }} ">
-              <input type="email" class="form-control"  value="{{ Auth::User()->email }}" placeholder="">
-            </div>
-          </div>
-          <div class="row mg-t-20">
-            <label class="col-sm-4 form-control-label">Amount to be paid: <span class="tx-danger">*</span></label>
-            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-              <input type="hidden" readonly name="payable" value="{{ $scholarship->price }}" class="form-control">
-              <input type="text" readonly  value="NGN {{ $scholarship->price }} to {{ $site->address }}" class="form-control">
-            </div>
-          </div>
-          <div class="row mg-t-20">
-            <label class="col-sm-4 form-control-label">Payment Proof: <span class="tx-danger">*</span></label>
-            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-              <input type="file" required name="pmt_proof" class="form-control">
-            </div>
-          </div>
-          <div class="row mg-t-20">
-            <label class="col-sm-4 form-control-label">Comments: <span class="tx-danger">*</span></label>
-            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-              <textarea rows="2" class="form-control" placeholder="Optional"></textarea>
-            </div>
-          </div>
-          <div class="form-layout-footer mg-t-30">
-            <button class="btn btn-info mg-r-5">Submit Form</button>
-            <button class="btn btn-secondary">Cancel</button>
-          </div><!-- form-layout-footer -->
-      </form>
-        </div><!-- card -->
-      </div><!-- col-6 -->
-    </div><!-- row -->
+          <div class="row row-sm mg-t-20">
+          <div class="col-12">
+            <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
+              {{-- <h6 class="card-body-title"></h6> --}}
+              {{-- <p class="mg-b-20 mg-sm-b-30"></p> --}}
+          <form action="{{ route('Applications.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+              <div class="row">
+                <label class="col-sm-4 form-control-label">Username: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                  <input type="hidden" class="form-control" name="sch_id" value="{{ $scholarship->id }}">
+                  <input type="hidden" class="form-control" name="sch_name" value="{{ $scholarship->name }}">
+                  <input type="text" readonly class="form-control" value="{{ Auth::User()->name }}">
+                </div>
+              </div><!-- row -->
+              <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Email: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                  <input type="hidden" class="form-control" name="user_id" value="{{ Auth::User()->id }} ">
+                  <input type="readonly" class="form-control"  value="{{ Auth::User()->email }}" placeholder="">
+                </div>
+              </div>
+              <div class="row mg-t-20">
+                {{-- <label class="col-sm-4 form-control-label">Amount to be paid: <span class="tx-danger">*</span></label> --}}
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                  <input type="hidden" readonly name="payable" value="{{ $scholarship->price }}" class="form-control">
+                  <input type="hidden" readonly name="sponsor" value="{{ $scholarship->sponsor }}" class="form-control">
+                  <input type="hidden" readonly name="cert" value="{{ $scholarship->cert }}" class="form-control">
+                  {{-- <input type="text" readonly  value="NGN {{ $scholarship->price }} to {{ $site->address }}" class="form-control"> --}}
+                </div>
+              </div>
+              <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Payment Proof: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                  <input type="file" required name="pmt_proof" class="form-control">
+                </div>
+              </div>
+              <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Comments: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                  <textarea rows="2" class="form-control" placeholder="Optional"></textarea>
+                </div>
+              </div>
+              <div class="form-layout-footer mg-t-30">
+                <button class="btn btn-info mg-r-5">Submit Application</button>
+                <a href="{{ route('Applications.index') }}" class="btn btn-secondary">Cancel</a>
+              </div><!-- form-layout-footer -->
+          </form>
+            </div><!-- card -->
+          </div><!-- col-6 -->
+        </div><!-- row -->
 
       </div><!-- sl-pagebody -->
       @include('users.inc.footer')

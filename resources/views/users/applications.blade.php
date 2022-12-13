@@ -88,8 +88,10 @@
                     <th class="wd-35p">Program names</th>
                     <th class="wd-20p">Sponsor</th>
                     <th class="wd-25p">Sch. Type</th>
-                    <th class="wd-10p">Charge</th>
+                    <th class="wd-10p">Charge[$]</th>
                     <th class="wd-5p">Level</th>
+                    <th class="wd-5p">Country</th>
+                    <th class="wd-5p">slots</th>
                     <th class="wd-5p"></th>
                   </tr>
                 </thead>
@@ -100,14 +102,16 @@
                       $used = App\Models\Applications::where('sch_id', '=', $scholarship->id)->count();
                   @endphp
                   <tr>
-                    <td>{{ $scholarship->name }}</td>
+                    <td data-toggle="tooltip" data-placement="top" title="Tab to see more info">{{ $scholarship->name }}</td>
                     <td>{{ $scholarship->sponsor }}</td>
                     <td>{{ $scholarship->type }}</td>
                     <td>{{ $scholarship->price }}</td>
+                    <td>{{ $scholarship->cert }}</td>
+                    <td>{{ $scholarship->country }}</td>
                     <td>{{ $used }}/{{ $scholarship->slots }}</td>
                     <td>
-                      <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply" class="btn btn-outline-indigo    btn-icon rounded-circle btn-sm btn-small">
-                        <span class="p-1"><i class="fa fa-send"></i> </span>
+                      <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply now" class="btn btn-indigo  p2   btn-sm btn-small">
+                        <span class="p-1">Apply Now </span>
                       </a>
                     </td>
                   </tr>

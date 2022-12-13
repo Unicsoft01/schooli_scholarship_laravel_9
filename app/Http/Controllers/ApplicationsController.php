@@ -37,12 +37,19 @@ class ApplicationsController extends Controller
     public function store(Request $request)
     {
         // sch_id	
-// user_id	
-// payable	
 // pmt_status	
 // status	
-// created_at	 --}}
+// "sch_name"
+// user_id
+// payable
+// sponsor
+// cert
+// pmt_proof
+// return $request;
        
+            $data['type'] = $request->cert;
+            $data['sponsor'] = $request->sponsor;
+            $data['sch_name'] = $request->sch_name;
             $data['sch_id'] = $request->sch_id;
             $data['payable'] = $request->payable;
             $data['status'] = "pending";
@@ -65,7 +72,7 @@ class ApplicationsController extends Controller
                 return back()->with('alert', 'An error occured');
             }
 
-
+// return $request;
 
     }
 

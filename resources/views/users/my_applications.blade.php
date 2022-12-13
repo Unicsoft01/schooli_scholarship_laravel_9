@@ -85,7 +85,7 @@
               <table id="datatable1" class="table table-hover table-striped table-responsive display responsive nowrap table-bordered table-indigo disabled">
                 <thead>
                   <tr>
-                    <th class="wd-35p">Scholarship</th>
+                    <th class="wd-35p">Scholarship </th>
                     <th class="wd-20p">Sponsor</th>
                     <th class="wd-25p">Program Type</th>
                     <th class="wd-10p">Amount paid</th>
@@ -100,14 +100,15 @@
 user_id	
 payable	
 pmt_status	
+SCHOLARSHIP	SPONSOR	PROGRAM TYPE
 status --}}
                   {{-- @php
                         $scholarship = App\Models\Scholarship::where('id', '=', $Application->sch_id)->get();
                   @endphp --}}
                   <tr>
-                    <td>{{ $Application->name }}</td>
-                    <td>{{ $Application->name }}</td>
+                    <td  data-toggle="tooltip" data-placement="top" title="Tab to see more info">{{ $Application->sch_name }} <span class="d-md-none d-sm-block bold">+</span></td>
                     <td>{{ $Application->sponsor }}</td>
+                    <td>{{ $Application->type }}.</td>
                     <td>{{ $Application->payable }}</td>
                     <td>{{ $Application->pmt_status }}</td>
                     <td>{{ $Application->status }}</td>
