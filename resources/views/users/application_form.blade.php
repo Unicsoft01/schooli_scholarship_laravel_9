@@ -72,7 +72,8 @@
 
       <div class="sl-pagebody">
         <div class="sl-page-title">
-          <h5>{{ ucfirst($scholarship->name) }}</h5>
+          <img src="{{ url('/') }}/img/img3.jpg" class="wd-60 rounded-circle" alt="">
+          <h5> {{ ucfirst($scholarship->name) }}</h5>
           <p>Sponsored by {{ ucfirst($scholarship->sponsor) }}</p>
         </div><!-- sl-page-title -->
 
@@ -114,7 +115,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header card-header-default justify-content-between bg-gray-400">
-                  <h6 class="mg-b-0 tx-14 tx-inverse">Application requirements</h6>
+                  <h6 class="mg-b-0 tx-14 tx-inverse">Payment Details</h6>
                 </div><!-- card-header -->
                 <div class="card-body bg-gray-200">
                   <p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship after paying an application fee of : <b>{{ ucfirst($scholarship->price) }}</b> to the following bank Account</p>
@@ -126,6 +127,112 @@
                   <h6>Acc. No. 2127678388</h6>
                   <h6>Acc. Name. Muhammed Yakub</h6>
                   <p class="text-danger">Please submit your evidence of payment during application, for verification purpose</p>
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col-6 -->
+          </div><!-- row -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header card-header-default justify-content-between bg-gray-400">
+                  <h6 class="mg-b-0 tx-14 tx-inverse">Application Requirements</h6>
+                </div><!-- card-header -->
+                <div class="card-body bg-gray-200">
+                  <div class="card pd-20 pd-sm-40 mg-t-50">
+                    {{-- <h6 class="card-body-title">File Browser</h6> --}}
+                    <p class="mg-b-20 mg-sm-b-30">Please ensure to Submit original copies of each document</p>
+          
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <small><b>Transcripts/Certificates<span class="text-danger">*</span></b><br>
+                          Undergrad Transcripts/Certificates<span class="text-danger">*</span></small>
+                        <label class="custom-file">
+                          <input type="file" id="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>Degree<span class="text-danger">*</span></b><br>
+                          Undergraduate/Bachelors</small>
+                        <label class="custom-file">
+                          <input type="file" id="file2" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>CV/Resume<span class="text-danger">*</span></b><br>
+                          Detailed CV/Resume</small>
+                        <label class="custom-file">
+                          <input type="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
+                          Two Letters of Recommendation</small>
+                        <label class="custom-file">
+                          <input type="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                    </div><!-- row --> 
+
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <small><b>Age Requirement/Passport Copy<span class="text-danger">*</span></b><br>
+                          Scanned copy (Front and Back of the Passport)<span class="text-danger">*</span></small>
+                        <label class="custom-file">
+                          <input type="file" id="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>English Proficiency Requirement<span class="text-danger">*</span></b><br>
+                          IELTS Scorecard/TOEFL Scorecard/Duolingo Scorecard/English Waiver Letter</small>
+                        <label class="custom-file">
+                          <input type="file" id="file2" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>Digital Passport Photograph<span class="text-danger">*</span></b><br>
+                          Passport size photograph (White background)</small>
+                        <label class="custom-file">
+                          <input type="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>Personal Statement/SOP<span class="text-danger">*</span></b><br>
+                          Statement of Purpose (500 Words)
+                          </small>
+                        <label class="custom-file">
+                          <input type="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
+                          Two Letters of Recommendation
+                          </small>
+                        <label class="custom-file">
+                          <input type="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                        <small><b>Additional Documents<span class="text-danger">*</span></b><br>
+                          Combine all additional documents into one PDF
+                          </small>
+                        <label class="custom-file">
+                          <input type="file" class="custom-file-input">
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div><!-- col -->
+                    </div><!-- row -->
+                  </div>
                 </div><!-- card-body -->
               </div><!-- card -->
             </div><!-- col-6 -->
