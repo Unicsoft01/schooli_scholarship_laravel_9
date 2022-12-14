@@ -25,7 +25,7 @@ class ApplicationsController extends Controller
      */
     public function create()
     {
-        // return $id;
+        
     }
 
     /**

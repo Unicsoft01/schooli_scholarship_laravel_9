@@ -50,7 +50,7 @@
         <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">{{ $site->site_name }} <span class="tx-info tx-normal"></span></div>
         <div class="tx-center mg-b-60">Login to continue!</div>
 
-        <form action="{{ route('admin.login.store') }}" method="post">
+        <form action="{{ route('login') }}" method="post">
             @csrf
             <div class="form-group">
                 <input id="email"  type="email" name="email" :value="old('email')" required autofocus  class="form-control" placeholder="Enter your Email Address">

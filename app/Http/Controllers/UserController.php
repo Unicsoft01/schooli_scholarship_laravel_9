@@ -24,7 +24,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $pageTitle = "Users table";
+        return view('admin.users.index', compact('pageTitle'));
     }
 
     /**
