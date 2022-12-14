@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\PaymentsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('Applications/createApp/{id}', 'CreateApplication')->name('app.create');
         Route::get('myApps', 'MyApplications')->name('my.applications');
         // Route::post('/contact/Store', 'ContactStore')->name('contact.store');
+    });
+
+
+    Route::controller(PaymentsController::class)->group(function (){
+        Route::get('Payments', 'index')->name('payments');
+        Route::get('Payments/{id}', 'Show')->name('payments.show');
+        Route::get('Payments/query/{id}', 'QueryPmt')->name('payments.query');
     });
 
 

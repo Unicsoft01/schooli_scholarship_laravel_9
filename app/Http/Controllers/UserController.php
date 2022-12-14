@@ -82,4 +82,12 @@ class UserController extends Controller
     {
         //
     }
+
+    public function Pmt()
+    {
+        $pageTitle = "My payments";
+        // return view('users.my_payments', compact('pageTitle'));
+        return $pageTitle;
+    }
+
 }

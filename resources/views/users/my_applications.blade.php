@@ -89,7 +89,7 @@
                     <th class="wd-20p">Sponsor</th>
                     <th class="wd-25p">Program Type</th>
                     <th class="wd-10p">Amount paid</th>
-                    <th class="wd-5p">payment status</th>
+                    <th class="wd-5p">Modified</th>
                     <th class="wd-5p">Status</th>
                   </tr>
                 </thead>
@@ -106,11 +106,11 @@ status --}}
                         $scholarship = App\Models\Scholarship::where('id', '=', $Application->sch_id)->get();
                   @endphp --}}
                   <tr>
-                    <td  data-toggle="tooltip" data-placement="top" title="Tab to see more info">{{ $Application->sch_name }} <span class="d-md-none d-sm-block bold">+</span></td>
+                    <td  data-toggle="tooltip" data-placement="top" title="Tab to see more info">{{ $Application->sch_name }} &nbsp; <span class="d-md-none d-sm-block bold">+</span></td>
                     <td>{{ $Application->sponsor }}</td>
                     <td>{{ $Application->type }}.</td>
-                    <td>{{ $Application->payable }}</td>
-                    <td>{{ $Application->pmt_status }}</td>
+                    <td>N{{ number_format($Application->payable) }}</td>
+                    <td>{{ $Application->updated_at }}</td>
                     <td>{{ $Application->status }}</td>
                   </tr>
                   @endforeach
@@ -118,7 +118,7 @@ status --}}
               </table>
               {{-- <button class="btn btn-secondary btn-sm " style="width: 100%">Primary</button> --}}
               <div class="card-footer tx-12 pd-y-1 bg-transparent bd-t bd-gray-200">
-                <a href="{{ route('Scholarship.index') }}"><i class="fa fa-angle-down mg-r-5"></i>See more scholarship programs</a>
+                <a href="{{ route('Applications.index') }}"><i class="fa fa-angle-down mg-r-5"></i>See more scholarship programs</a>
               </div>
   
             </div><!-- table-wrapper -->

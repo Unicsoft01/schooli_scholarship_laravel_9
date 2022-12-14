@@ -118,7 +118,7 @@
                   <h6 class="mg-b-0 tx-14 tx-inverse">Payment Details</h6>
                 </div><!-- card-header -->
                 <div class="card-body bg-gray-200">
-                  <p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship after paying an application fee of : <b>{{ ucfirst($scholarship->price) }}</b> to the following bank Account</p>
+                  N<p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship after paying an application fee of : <b>C{{ number_format($scholarship->price) }}</b> to the following bank Account</p>
                   {{-- @foreach ($requirements as $requirement)
                    <li class="mg-b-0">{{ ucfirst($requirement->requirements) }}</li>
                   @endforeach --}}

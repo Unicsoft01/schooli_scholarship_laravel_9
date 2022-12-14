@@ -99,10 +99,10 @@
                     $used = App\Models\Applications::where('sch_id', '=', $scholarship->id)->count();
                 @endphp
                 <tr>
-                  <td>{{ $scholarship->name }}</td>
+                  <td>{{ $scholarship->name }} &nbsp;<span class="d-md-none d-sm-block" style="font-weight: 600">+</span></td>
                   <td>{{ $scholarship->sponsor }}</td>
                   <td>{{ $scholarship->type }}</td>
-                  <td>{{ $scholarship->price }}</td>
+                  <td>N{{ number_format($scholarship->price) }}</td>
                   <td>{{ $used }}/{{ $scholarship->slots }}</td>
                   <td>
                     <a href="Applications/createApp/{{ $scholarship->id }}" title="Apply now" class="btn btn-indigo  p2   btn-sm btn-small">
