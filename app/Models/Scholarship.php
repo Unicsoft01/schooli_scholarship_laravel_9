@@ -18,5 +18,6 @@ class Scholarship extends Model
         'price',
         'slots',
         'status',
+        'sch_img',
     ];
 }

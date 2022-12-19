@@ -1,76 +1,21 @@
 @php
     $pageTitle = "Apply for scholarship";
     $site = App\Models\Settings::find(1);
+    $id = $id[0];
+    $user_id = intval($id[1]);
     $scholarship = App\Models\Scholarship::find($id);
+    $user = App\Models\User::find($user_id);
     $requirements = App\Models\Requirements::latest()->whereSch_id($id)->get();
 @endphp
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('admin.dashboard')
+@section('main_contents')
+<div class="sl-mainpanel">
+  <nav class="breadcrumb sl-breadcrumb">
+    <a class="breadcrumb-item" href="admin/dashboard">Admin Dashboard</a>
+    <span class="breadcrumb-item active">{{ ucfirst($scholarship->name) }}</span>
+  </nav>
 
-    <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Starlight">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/starlight/img/starlight-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/starlight">
-    <meta property="og:title" content="Starlight">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-
-    <meta property="og:image" content="http://themepixels.me/starlight/img/starlight-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/starlight/img/starlight-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
-
-    <!-- Meta -->
-    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="author" content="ThemePixels">
-
-    <title>{{ $pageTitle }}</title>
-
-    <!-- vendor css -->
-    <link href="{{ url('/') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="{{ url('/') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
-    <link href="{{ url('/') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-    <link href="{{ url('/') }}/lib/highlightjs/github.css" rel="stylesheet">
-    <link href="{{ url('/') }}/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
-
-    <!-- Starlight CSS -->
-    <link rel="stylesheet" href="{{ url('/') }}/css/starlight.css">
-  </head>
-
-  <body>
-
-    <!-- ########## START: LEFT PANEL ########## -->
-    @include('users.inc.lsidebar')
-    <!-- sl-sideleft -->
-    <!-- ########## END: LEFT PANEL ########## -->
-
-    <!-- ########## START: HEAD PANEL ########## -->
-    @include('users.inc.header')
-    
-    <!-- ########## END: HEAD PANEL ########## -->
-
-    <!-- ########## START: RIGHT PANEL ########## -->
-    <!-- sl-sideright -->
-    <!-- ########## END: RIGHT PANEL ########## --->
-
-    <!-- ########## START: MAIN PANEL ########## -->
-    <div class="sl-mainpanel">
-      <nav class="breadcrumb sl-breadcrumb">
-            <a class="breadcrumb-item" href="/">{{ $site->site_name }}</a>
-            <span class="breadcrumb-item active">Applications</span>
-      </nav>
-
-      <div class="sl-pagebody">
+  <div class="sl-pagebody">
         <div class="sl-page-title">
           <img src="{{ url('/') }}/img/{{ $scholarship->sch_img }}" class="wd-60 rounded-circle" alt="">
           <h5> {{ ucfirst($scholarship->name) }}</h5>
@@ -102,7 +47,7 @@
                   <h6 class="mg-b-0 tx-14 tx-inverse">Scholarship requirements</h6>
                 </div><!-- card-header -->
                 <div class="card-body bg-gray-200">
-                  <p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship based on the following requirements:</p>
+                  <p class="mg-b-0"> Requirements for the program:</p>
                   @foreach ($requirements as $requirement)
                    <li class="mg-b-0">{{ ucfirst($requirement->requirements) }}</li>
                   @endforeach
@@ -115,7 +60,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header card-header-default justify-content-between bg-gray-400">
-                  <h6 class="mg-b-0 tx-14 tx-inverse">Payment Details</h6>
+                  <h6 class="mg-b-0 tx-14 tx-inverse">Payment Details for {{ ucwords($user->name) }}</h6>
                 </div><!-- card-header -->
                 <div class="card-body bg-gray-200">
                   N<p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship after paying an application fee of : <b>C{{ number_format($scholarship->price) }}</b> to the following bank Account</p>
@@ -379,6 +324,6 @@
 
       });
     </script>
-
-  </body>
-</html>
+@include('admin.inc.footer')
+</div>
+@endsection

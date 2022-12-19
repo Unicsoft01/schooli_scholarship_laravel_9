@@ -56,16 +56,15 @@ created_a	 --}}
               @php
               $used = App\Models\Applications::where('sch_id', '=', $application->id)->count();
           @endphp
-                <td>{{ ucfirst($application->name) }}</td>
-                <td>{{ ucfirst($application->sponsor) }}</td>
+                <td>{{ ucfirst($application->sch_name) }}</td>
+                <td>{{ ucfirst(App\Models\User::find($application->user_id)->name) }}</td>
+                <td>{{ ucfirst(App\Models\Scholarship::find($application->sch_id)->type) }}</td>
                 <td>{{ ucfirst($application->type) }}</td>
-                <td>{{ ucfirst($application->cert) }}</td>
-                <td>{{ ucfirst($application->country) }}</td>
-                  <td>{{ number_format($application->price) }}</td>
-                  <td>{{ $used }}/{{ $application->slots }}</td>
-                <td>{!! date('D, d-M-y h:i', strtotime($application->created_at)) !!}</td>
+                <td>{{ ucfirst(App\Models\Scholarship::find($application->sch_id)->country) }}</td>
+                  <td>{{ number_format($application->payable) }}</td>
+                <td>{!! date('d-M-y', strtotime($application->created_at)) !!}</td>
                 
-                <td><button class="btn btn-success rounded-10">More</button></td>
+                <td><a href="{{route('Applications.show', $application->sch_id.','.App\Models\User::find($application->user_id)->id)}}" class="btn btn-success rounded-10 btn-sm btn-small">More</a></td>
               </tr>
               @endforeach
             </tbody>

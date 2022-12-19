@@ -9,7 +9,7 @@
 <div class="sl-mainpanel">
   <nav class="breadcrumb sl-breadcrumb">
     <a class="breadcrumb-item" href="admin/dashboard">Admin Dashboard</a>
-    <span class="breadcrumb-item active">Users table</span>
+    <span class="breadcrumb-item active">Payments table</span>
   </nav>
 
   <div class="sl-pagebody">
@@ -19,8 +19,8 @@
     <div class="sl-pagebody">
 
       <div class="card pd-20 pd-sm-40">
-        <h6 class="card-body-title">Registered Users Table</h6>
-        {{-- <p class="mg-b-20 mg-sm-b-30">Searching, ordering and paging goodness will be immediately added to the table, as shown in this example.</p> --}}
+        <h6 class="card-body-title">Payments histories</h6>
+        <p class="mg-b-20 mg-sm-b-30">You can search for payments Using any payment details eg: name, date</p>
 
 {{-- Full texts
 id	
@@ -39,12 +39,12 @@ updated_at --}}
             <thead>
                   <tr>
                         <th class="wd-40p">Pmt For </th>
-                        <th class="wd-20p">Users</th>
+                        <th class="wd-25p">Users</th>
                         <th class="wd-15p">Amount paid</th>
                         <th class="wd-20p">Paid</th>
                         <th class="wd-10p">Modified</th>
                         <th class="wd-10p">Status</th>
-                        <th class="wd-5p"></th>
+                        {{-- <th class="wd-5p"></th> --}}
                       </tr>
             </thead>
             <tbody>
@@ -55,12 +55,12 @@ updated_at --}}
               <tr>
                 <td>{{ ucfirst($application->sch_name) }}</td>
                 <td>{{ ucfirst($user->name) }}</td>
-                <td>{{ number_format($application->payable) }}</td>
+                <td>N{{ number_format($application->payable) }}</td>
                 <td>{!! date('D, d-M-y h:i', strtotime($user->created_at)) !!}</td>
-                <td>{!! date('D, d-M-y h:i', strtotime($user->updated)) !!}</td>
+                <td>{!! date('D, d-M-y h:i', strtotime($user->updated_at)) !!}</td>
                 <td>{{ ucfirst($application->pmt_status) }}</td>
                 
-                <td><button class="btn btn-success rounded-10">Approve Payment</button></td>
+                {{-- <td><button class="btn btn-success rounded-10 btn-sm">Approve</button></td> --}}
               </tr>
               @endforeach
             </tbody>

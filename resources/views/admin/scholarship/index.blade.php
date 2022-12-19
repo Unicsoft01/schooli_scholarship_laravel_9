@@ -42,15 +42,15 @@ updated_at	 --}}
           <table id="datatable1" class="table display responsive nowrap">
             <thead>
                   <tr>
-                        <th class="wd-35p">Program </th>
+                        <th class="wd-30p">Program </th>
                         <th class="wd-15p">sponsor</th>
                         <th class="wd-15p">School type</th>
                         <th class="wd-10p">Cert. type</th>
                         <th class="wd-10p">Country</th>
                         <th class="wd-5p">Payable</th>
                         <th class="wd-5p">Slots</th>
-                        <th class="wd-5p">Created</th>
-                        <th class="wd-5p"></th>
+                        {{-- <th class="wd-5p">Created</th> --}}
+                        {{-- <th class="wd-5p"></th> --}}
                       </tr>
             </thead>
             <tbody>
@@ -65,9 +65,9 @@ updated_at	 --}}
                 <td>{{ ucfirst($scholarship->country) }}</td>
                   <td>{{ number_format($scholarship->price) }}</td>
                   <td>{{ $used }}/{{ $scholarship->slots }}</td>
-                <td>{!! date('D, d-M-y h:i', strtotime($scholarship->created_at)) !!}</td>
+                {{-- <td>{!! date('D, d-M-y h:i', strtotime($scholarship->created_at)) !!}</td> --}}
                 
-                <td><button class="btn btn-success rounded-10">More</button></td>
+                {{-- <td><button class="btn btn-success rounded-10 btn-sm btn-small">More</button></td> --}}
               </tr>
               @endforeach
             </tbody>

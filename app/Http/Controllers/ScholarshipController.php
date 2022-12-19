@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Scholarship;
+use App\Models\Requirements;
+use App\Http\Controllers\AlertController;
+use App\Models\Applications;
+use Image;
 
 class ScholarshipController extends Controller
 {
@@ -25,7 +29,8 @@ class ScholarshipController extends Controller
      */
     public function create()
     {
-        // admin creating new scho programs
+        $pageTitle = "Program Descriptions";
+        return view('admin.scholarship.requirements', compact('pageTitle'));
     }
 
     /**
@@ -45,24 +50,43 @@ class ScholarshipController extends Controller
         $data['cert'] = $request->cert;
         $data['country'] = $request->country;
         $data['about'] = $request->about;
-        $data['price'] = "price";
-        $data['slots'] = "slots";
+        $data['price'] = $request->price;
+        $data['slots'] = $request->slots;
         $data['status'] = "open";
-        // if($request->hasFile('image')){
+        // if($request->file('image')){
         //     $image = $request->file('image');
-        //     $filename = 'paypal_'.time().'.jpg';
-        //     $location = 'oldasset/images/' . $filename;
+        //     $filename = 'program_'.time().'.jpg';
+        //     $location = 'img/' . $filename;
         //     Image::make($image)->save($location);
-        //     $data['image'] = $filename;
+        //     $data['sch_img'] = $filename;
+        //     // Image::make($request->file('photo')->getRealPath())
         // }
+//         if($request->file('sch_img'))
+// {
+//    $image = $request->file('sch_img');
+//    $filename = 'program_'.time().'.jpg';
+//    $image = $image->move(public_path('img'), $filename);
+//             // Image::make($image)->save($location);
+//             $data['sch_img'] = $filename;
+//             // Image::make($request->file('photo')->getRealPath())
+//         }
+if($request->file('sch_img'))
+{
+   $image = $request->file('sch_img');
+   $filename = 'program_'.time().'.jpg';
+   $image->move(public_path('img'), $filename);
+    $data['sch_img'] = $filename;
+            // Image::make($request->file('photo')->getRealPath())
+}
+// return  $data['sch_img'];
         $res = Scholarship::create($data);
         if ($res)
         {
-            return redirect()->route('Scholarship.index')->with('success', 'success');
+            return redirect()->route('Scholarship.create')->with(AlertController::SendAlert());
         }
         else
         {
-            return back()->with('alert', 'An error occured');
+            return back()->with(AlertController::SendAlert('danger', 'Not saved!'));
         }
     }
 
@@ -85,7 +109,11 @@ class ScholarshipController extends Controller
      */
     public function edit($id)
     {
-        // 
+        $item = Applications::find($id);
+        $item->status = "approved";
+        $item->pmt_status = "approved";
+        $item->save();
+        return back()->with(AlertController::SendAlert());
     }
 
     /**
@@ -109,5 +137,27 @@ class ScholarshipController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function Req_store(Request $request)
+    {
+        // return $request;
+        foreach($request->requirement as $require)
+        {
+            $data['sch_id'] = $request->program;
+            $data['requirements'] = $require;
+            // print_r($data);
+            $res = Requirements::create($data);
+            
+        }
+        if ($res)
+            {
+                return redirect()->route('Scholarship.create')->with(AlertController::SendAlert());
+            }
+            else
+            {
+                return back()->with(AlertController::SendAlert('danger', 'Not saved!'));
+            }
+
     }
 }

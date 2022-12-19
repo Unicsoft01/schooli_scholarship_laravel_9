@@ -42,7 +42,7 @@
     <link href="{{ url('/') }}/lib/highlightjs/github.css" rel="stylesheet">
     <link href="{{ url('/') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="{{ url('/') }}/lib/select2/css/select2.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ url('/') }}/css/starlight.css">
@@ -121,5 +121,8 @@
 
       });
     </script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@include('notification')
   </body>
 </html>

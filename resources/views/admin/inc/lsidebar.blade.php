@@ -3,27 +3,27 @@
 
   <label class="sidebar-label">Navigation</label>
   <div class="sl-sideleft-menu">
-    <a href="index.html" class="sl-menu-link active">
+    <a href="/admin/dashboard" class="sl-menu-link @if(route('admin.dashboard')==url()->current()) active @endif">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
         <span class="menu-item-label">Dashboard</span>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
 
-    <a href="{{ route('Users.create') }}" class="sl-menu-link ">
+    <a href="{{ route('Users.create') }}" class="sl-menu-link  @if(route('Users.create')==url()->current()) active @endif">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
         <span class="menu-item-label">Users</span>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link --> 
-    <a href="{{ route('users.applications') }}" class="sl-menu-link ">
+    <a href="{{ route('users.applications') }}" class="sl-menu-link @if(route('users.applications')==url()->current()) active @endif">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
         <span class="menu-item-label">User Applications</span>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->    
 
-    <a href="{{ route('payments.show') }}" class="sl-menu-link ">
+    <a href="{{ route('payments.show') }}" class="sl-menu-link @if(route('payments.show')==url()->current()) active @endif">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
         <span class="menu-item-label">Payments</span>
@@ -37,7 +37,7 @@
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
     <ul class="sl-menu-sub nav flex-column">
-      <li class="nav-item"><a href="{{ route('Scholarship.index') }}" class="nav-link">Programs</a></li>
+      <li class="nav-item"><a href="{{ route('Scholarship.index') }}" class="nav-link">Programs</a></li><li class="nav-item"><a href="{{ route('Scholarship.create') }}" class="nav-link">Programs Requirements</a></li>
       <li class="nav-item">
         {{-- <a href="page-signin.html" class="nav-link">New Program</a> --}}
         <a href="" class="nav-link" data-toggle="modal" data-target="#modaldemo3">New Program</a>
@@ -88,7 +88,7 @@
       created_at	
       updated_at --}}
 
-<form action="{{ route('Scholarship.store') }}" method="post">
+<form action="{{ route('Scholarship.store') }}" method="post" enctype="multipart/form-data">
 @csrf
 <div class="form-layout">
   <div class="row mg-b-25">
@@ -113,7 +113,7 @@
     <div class="col-md-4">
       <div class="form-group mg-b-10-force">
         <label class="form-control-label">Certificate Type: <span class="tx-danger">*</span></label>
-        <input class="form-control" type="text" name="certificate" placeholder="Certificate type">
+        <input class="form-control" type="text" name="cert" placeholder="Certificate type">
       </div>
     </div><!-- col-4 -->
     <div class="col-md-4">
@@ -134,17 +134,23 @@
         <input class="form-control" type="number" name="price" placeholder="Payable">
       </div>
     </div><!-- col-4 -->
-    <div class="col-md-8">
+    <div class="col-md-4">
       <div class="form-group mg-b-10-force">
         <label class="form-control-label">Slot available: <span class="tx-danger">*</span></label>
-        <input class="form-control" type="number" name="slots" placeholder="Payable">
+        <input class="form-control" type="number" name="slots" placeholder="Slots Available">
+      </div>
+    </div><!-- col-4 -->
+    <div class="col-md-4">
+      <div class="form-group mg-b-10-force">
+        <label class="form-control-label">Program Image: <span class="tx-danger">*</span></label>
+        <input class="form-control" type="file" name="sch_img">
       </div>
     </div><!-- col-4 -->
   </div><!-- row -->
 
   <div class="form-layout-footer">
     <button class="btn btn-info mg-r-5">Proceed</button>
-    <button class="btn btn-secondary">Cancel</button>
+    {{-- <button class="btn btn-secondary">Cancel</button> --}}
   </div><!-- form-layout-footer -->
 </div><!-- form-layout -->
 </form>

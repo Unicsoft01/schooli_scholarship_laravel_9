@@ -36,11 +36,11 @@ class AdminController extends Controller
 
 
 
-    public function Sets()
-    {
-        $set = Settings::find(1);
-       return $set;
-    }
+    // public function Sets()
+    // {
+    //     $set = Settings::find(1);
+    //    return $set;
+    // }
         
     // public function __construct()
     // {		
@@ -198,21 +198,21 @@ class AdminController extends Controller
     //     return back()->with(AlertController::SendAlert('success', 'Ticket has been closed.'));
     // }     
     
-    // public function Blockuser($id)
-    // {
-    //     $user=User::find($id);
-    //     $user->status=1;
-    //     $user->save();
-    //     return redirect()->back()->with(AlertController::SendAlert('success', 'User has been suspended.'));
-    // } 
+    public function Blockuser($id)
+    {
+        $user=User::find($id);
+        $user->status="blocked";
+        $user->save();
+        return redirect()->back()->with(AlertController::SendAlert('success', 'User has been suspended.'));
+    } 
 
-    // public function Unblockuser($id)
-    // {
-    //     $user=User::find($id);
-    //     $user->status=0;
-    //     $user->save();
-    //     return redirect()->back()->with(AlertController::SendAlert('success', 'User was successfully unblocked.'));
-    // }
+    public function Unblockuser($id)
+    {
+        $user=User::find($id);
+        $user->status="active";
+        $user->save();
+        return redirect()->back()->with(AlertController::SendAlert('success', 'User was successfully unblocked.'));
+    }
 
     // public function Approvekyc($id)
     // {

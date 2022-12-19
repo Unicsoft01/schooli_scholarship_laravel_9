@@ -43,6 +43,7 @@ updated_at --}}
                 <th class="wd-40p">Full name</th>
                 <th class="wd-30p">Email</th>
                 <th class="wd-15p">Register on</th>
+                <th class="wd-15p">User Status</th>
                 <th class="wd-15p"></th>
               </tr>
             </thead>
@@ -55,8 +56,15 @@ updated_at --}}
                 <td>{{ ucfirst($user->name) }}</td>
                 <td>{{ ucfirst($user->email) }}</td>
                 <td>{!! date('D, d-M-y h:i', strtotime($user->created_at)) !!}</td>
+                <td>{{ ucfirst($user->status) }}</td>
                 
-                <td><button class="btn btn-success rounded-10">Approve Trans.</button></td>
+                <td>
+                  @if ($user->status == "active")
+                  <a href="block-user/{{ $user->id }}" class="btn btn-danger rounded-10 btn-sm ">Block User</a>
+                  @else
+                  <a href="unblock-user/{{ $user->id }}" class="btn btn-success rounded-10 btn-sm ">Activate User</a>
+                  @endif
+                </td>
               </tr>
               @endforeach
             </tbody>

@@ -1,6 +1,7 @@
 @php
   $users = App\Models\User::get();
-  $applications = App\Models\Applications::get();
+  $users_ = App\Models\User::whereStatus('active')->get();
+  $applications = App\Models\Applications::whereStatus('pending')->get();
   $applications_ = App\Models\Applications::whereStatus('pending')->get();
   $sch = App\Models\Scholarship::get();
   $sch_ = App\Models\Scholarship::whereStatus('closed')->get();
@@ -30,12 +31,12 @@
           </div><!-- card-body -->
           <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
             <div>
-              <span class="tx-11 tx-white-6">On Scholarships</span>
-              <h6 class="tx-white mg-b-0">{{ count($applications) }}</h6>
+              <span class="tx-11 tx-white-6">Blocked</span>
+              <h6 class="tx-white mg-b-0">{{ count(App\Models\User::whereStatus('blocked')->get()) }}</h6>
             </div>
             <div>
               <span class="tx-11 tx-white-6">Active Users</span>
-              <h6 class="tx-white mg-b-0">{{ count($users) }}</h6>
+              <h6 class="tx-white mg-b-0">{{ count($users_) }}</h6>
             </div>
           </div><!-- -->
         </div><!-- card -->
@@ -70,16 +71,17 @@
           </div><!-- card-header -->
           <div class="d-flex align-items-center justify-content-between">
             {{-- <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span> --}}
-            <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ count($applications) }}</h3>
+            <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ count(App\Models\Applications::get()) }}</h3>
           </div><!-- card-body -->
           <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
             <div>
               <span class="tx-11 tx-white-6">Pending Applications</span>
               <h6 class="tx-white mg-b-0">{{ count($applications_) }}</h6>
+              {{-- {{  App\Models\User::find($application->user_id)->name }} --}}
             </div>
             <div>
               <span class="tx-11 tx-white-6">Approved Applications</span>
-              <h6 class="tx-white mg-b-0">{{ count($applications_)-count($applications_) }}</h6>
+              <h6 class="tx-white mg-b-0">{{ count(App\Models\Applications::whereStatus('approved')->get())-count($applications_) }}</h6>
             </div>
           </div><!-- -->
         </div><!-- card -->
@@ -132,14 +134,14 @@ updated_at --}}
           <table id="datatable1" class="table display responsive nowrap">
             <thead>
               <tr>
-                <th class="wd-15p">Transactions</th>
+                <th class="wd-15p">Trans.</th>
                 <th class="wd-15p">User</th>
-                <th class="wd-20p">Program Type</th>
-                <th class="wd-15p">Paid</th>
-                <th class="wd-15p">Date</th>
-                <th class="wd-10p">Pmt. Status</th>
-                <th class="wd-10p">Trans. Status</th>
-                <th class="wd-25p"></th>
+                <th class="wd-5p">Type</th>
+                <th class="wd-5p">Paid</th>
+                <th class="wd-10p">Date</th>
+                <th class="wd-5p">Pmt. Status</th>
+                <th class="wd-5p">Trans. Status</th>
+                <th class="wd-5p"></th>
               </tr>
             </thead>
             <tbody>
@@ -149,18 +151,18 @@ updated_at --}}
                 <td>{{  App\Models\User::find($application->user_id)->name }}</td>
                 <td>{{ ucfirst($application->type) }}</td>
                 <td>{{ number_format($application->payable) }}</td>
-                <td>{!! date('D, d-M-y h:i', strtotime($application->created_at)) !!}</td>
+                <td>{!! date('d-M-y h:i', strtotime($application->created_at)) !!}</td>
                 <td>
                   @if ($application->pmt_status == "pending")
-                  <button class="btn btn-primary disabled rounded-20">{{ ucfirst($application->pmt_status)}}</button>
+                  <button class="btn btn-primary disabled rounded-20 btn-sm btn-small">{{ ucfirst($application->pmt_status)}}</button>
                   @elseif ($application->pmt_status == "verified")
-                  <button class="btn btn-secondary disabled rounded-20">{{ ucfirst($application->pmt_status)}}</button>
+                  <button class="btn btn-secondary disabled rounded-20 btn-sm btn-small">{{ ucfirst($application->pmt_status)}}</button>
                   @else
                   {{ ucfirst($application->pmt_status)}}
                   @endif
                 </td>
                 <td>{{ ucfirst($application->status)}}</td>
-                <td><button class="btn btn-success rounded-10">Approve Trans.</button></td>
+                <td><a href="{{route('Scholarship.edit', $application->id)}}" class="btn btn-success rounded-10 btn-sm btn-small">Approve Trans.</a></td>
               </tr>
               @endforeach
             </tbody>

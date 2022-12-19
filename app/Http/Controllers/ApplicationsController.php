@@ -84,7 +84,11 @@ class ApplicationsController extends Controller
      */
     public function show($id)
     {
-        //
+        // return $id;
+        $string = $id;
+        $id = explode (",", $string); 
+        // print_r($id);
+        return view('admin.users.showapp', compact('id'));
     }
 
     /**
