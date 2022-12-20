@@ -1,12 +1,20 @@
 @php
     $pageTitle = "Apply for scholarship";
     $site = App\Models\Settings::find(1);
-    $id = $id[0];
-    $user_id = intval($id[1]);
-    $scholarship = App\Models\Scholarship::find($id);
+    $appid = $id[0];
+    $user_id = $id[1];
+    $scholarship = App\Models\Scholarship::find($appid);
     $user = App\Models\User::find($user_id);
-    $requirements = App\Models\Requirements::latest()->whereSch_id($id)->get();
+    $requirements = App\Models\Requirements::latest()->whereSch_id($appid)->get();
+    $application = App\Models\Applications::whereUser_id($user_id)->get();
 @endphp
+{{-- {{ $scholarship }}
+<hr/>
+{{ $user }}
+<hr/>
+{{ $requirements }}
+<hr/>
+{{ $application }} --}}
 @extends('admin.dashboard')
 @section('main_contents')
 <div class="sl-mainpanel">
@@ -25,7 +33,7 @@
 
 
         <div class="card pd-20 pd-sm-40 mg-t-50">
-          {{-- <h6 class="card-body-title">Card with Buttons &amp; Options</h6>
+          {{-- <h6 class="card-body-title">Card with as &amp; Options</h6>
           <p class="mg-b-20 mg-sm-b-30">Cards with some options in the right corner of header of card.</p> --}}
 
           <div class="row">
@@ -57,25 +65,7 @@
             </div><!-- col-6 -->
           </div><!-- row -->
           <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-header card-header-default justify-content-between bg-gray-400">
-                  <h6 class="mg-b-0 tx-14 tx-inverse">Payment Details for {{ ucwords($user->name) }}</h6>
-                </div><!-- card-header -->
-                <div class="card-body bg-gray-200">
-                  N<p class="mg-b-0"> Applicants to the <b>{{ ucfirst($scholarship->name) }}</b> program may qualify for scholarship after paying an application fee of : <b>C{{ number_format($scholarship->price) }}</b> to the following bank Account</p>
-                  {{-- @foreach ($requirements as $requirement)
-                   <li class="mg-b-0">{{ ucfirst($requirement->requirements) }}</li>
-                  @endforeach --}}
-                  {{-- <li class="mg-b-0">{{ ucfirst($scholarship->about) }}</li> --}}
-                  <h6>Bank name: UBA</h6>
-                  <h6>Acc. No. 2127678388</h6>
-                  <h6>Acc. Name. Muhammed Yakub</h6>
-                  <p class="text-danger">Please submit your evidence of payment during application, for verification purpose</p>
-                </div><!-- card-body -->
-              </div><!-- card -->
-            </div><!-- col-6 -->
-          </div><!-- row -->
+            
           <div class="row">
             <div class="col-12">
               <div class="card">
@@ -87,96 +77,64 @@
                     {{-- <h6 class="card-body-title">File Browser</h6> --}}
                     <p class="mg-b-20 mg-sm-b-30">Please ensure to Submit original copies of each document</p>
           
-                    <div class="row">
-                      <div class="col-lg-3">
-                        <small><b>Transcripts/Certificates<span class="text-danger">*</span></b><br>
-                          Undergrad Transcripts/Certificates<span class="text-danger">*</span></small>
-                        <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Degree<span class="text-danger">*</span></b><br>
-                          Undergraduate/Bachelors</small>
-                        <label class="custom-file">
-                          <input type="file" id="file2" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>CV/Resume<span class="text-danger">*</span></b><br>
-                          Detailed CV/Resume</small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
-                          Two Letters of Recommendation</small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                    </div><!-- row --> 
-
-                    <div class="row">
-                      <div class="col-lg-3">
-                        <small><b>Age Requirement/Passport Copy<span class="text-danger">*</span></b><br>
-                          Scanned copy (Front and Back of the Passport)<span class="text-danger">*</span></small>
-                        <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>English Proficiency Requirement<span class="text-danger">*</span></b><br>
-                          IELTS Scorecard/TOEFL Scorecard/Duolingo Scorecard/English Waiver Letter</small>
-                        <label class="custom-file">
-                          <input type="file" id="file2" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Digital Passport Photograph<span class="text-danger">*</span></b><br>
-                          Passport size photograph (White background)</small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Personal Statement/SOP<span class="text-danger">*</span></b><br>
-                          Statement of Purpose (500 Words)
-                          </small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
-                          Two Letters of Recommendation
-                          </small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Additional Documents<span class="text-danger">*</span></b><br>
-                          Combine all additional documents into one PDF
-                          </small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                    </div><!-- row -->
+                    <div class="table-wrapper">
+                      <table id="datatable1" class="table display responsive nowrap">
+                        <thead>
+                              <tr>
+                                    <th class="wd-50p">File name </th>
+                                    <th class="wd-50p"></th>
+                                  </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($application as $file)
+                          <tr>
+                            <td>{{ $file->cert_file }}</td>
+                          <td><a href="{{ route('download',$file->cert_file) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                            <td>{{ $file->resume }}</td>
+                          <td><a href="{{ route('download',$file->resume) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                            <td>{{ $file->letter_recommend }}</td>
+                          <td><a href="{{ route('download',$file->letter_recommend ) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                             <td>{{ $file->passport }}</td>
+                          <td><a href="{{ route('download',$file->passport) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                             <td>{{ $file->eng_prof }}</td>
+                          <td><a href="{{ route('download',$file->eng_prof) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                            <td>{{ $file->sop }}</td>
+                          <td><a href="{{ route('download',$file->sop) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                            <td>{{ $file->addition }}</td>
+                          <td><a href="{{ route('download',$file->addition) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                            <td>{{ $file->pmt_proof }}</td>
+                          <td><a href="{{ route('download',$file->pmt_proof) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          <tr>
+                            <td>{{ $file->degree }}</td>
+                          <td><a href="{{ route('download',$file->degree) }}" class="btn btn-primary btn-sm btn-small">Download</a></td>
+                          </tr>
+                          
+                          
+                          
+                         
+                         
+                          
+                          
+                          
+                          
+                          @endforeach</tbody>
+                        </table>
+                      </div><!-- table-wrapper -->
                   </div>
                 </div><!-- card-body -->
               </div><!-- card -->
@@ -185,64 +143,6 @@
         </div><!-- card -->
 
 
-          {{-- Full texts
-          id	
-          sch_id	
-          user_id	
-          payable	
-          pmt_status	
-          status	
-          created_at	 --}}
-                
-
-          <div class="row row-sm mg-t-20">
-          <div class="col-12">
-            <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-              {{-- <h6 class="card-body-title"></h6> --}}
-              {{-- <p class="mg-b-20 mg-sm-b-30"></p> --}}
-          <form action="{{ route('Applications.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
-              <div class="row">
-                <label class="col-sm-4 form-control-label">Username: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="hidden" class="form-control" name="sch_id" value="{{ $scholarship->id }}">
-                  <input type="hidden" class="form-control" name="sch_name" value="{{ $scholarship->name }}">
-                  <input type="text" readonly class="form-control" value="{{ Auth::User()->name }}">
-                </div>
-              </div><!-- row -->
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Email: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="hidden" class="form-control" name="user_id" value="{{ Auth::User()->id }} ">
-                  <input type="readonly" class="form-control"  value="{{ Auth::User()->email }}" placeholder="">
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                {{-- <label class="col-sm-4 form-control-label">Amount to be paid: <span class="tx-danger">*</span></label> --}}
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="hidden" readonly name="payable" value="{{ $scholarship->price }}" class="form-control">
-                  <input type="hidden" readonly name="sponsor" value="{{ $scholarship->sponsor }}" class="form-control">
-                  <input type="hidden" readonly name="cert" value="{{ $scholarship->cert }}" class="form-control">
-                  {{-- <input type="text" readonly  value="NGN {{ $scholarship->price }} to {{ $site->address }}" class="form-control"> --}}
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Payment Proof: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="file" required name="pmt_proof" class="form-control">
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Comments: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <textarea rows="2" class="form-control" placeholder="Optional"></textarea>
-                </div>
-              </div>
-              <div class="form-layout-footer mg-t-30">
-                <button class="btn btn-info mg-r-5">Submit Application</button>
-                <a href="{{ route('Applications.index') }}" class="btn btn-secondary">Cancel</a>
-              </div><!-- form-layout-footer -->
-          </form>
             </div><!-- card -->
           </div><!-- col-6 -->
         </div><!-- row -->

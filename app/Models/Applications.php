@@ -17,6 +17,15 @@ class Applications extends Model
         'sch_name',
         'sponsor',
         'type',
+        'cert_file',
+        'resume',
+        'letter_recommend',
+        'passport',
+        'eng_prof',
+        'sop',
+        'addition',
+        'pmt_proof',
+        'degree',
     ];
 }
 	

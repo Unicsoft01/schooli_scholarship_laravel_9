@@ -69,7 +69,8 @@
             <a class="breadcrumb-item" href="/">{{ $site->site_name }}</a>
             <span class="breadcrumb-item active">Applications</span>
       </nav>
-
+      <form action="{{ route('Applications.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
       <div class="sl-pagebody">
         <div class="sl-page-title">
           <img src="{{ url('/') }}/img/{{ $scholarship->sch_img }}" class="wd-60 rounded-circle" alt="">
@@ -142,94 +143,61 @@
                     {{-- <h6 class="card-body-title">File Browser</h6> --}}
                     <p class="mg-b-20 mg-sm-b-30">Please ensure to Submit original copies of each document</p>
           
-                    <div class="row">
-                      <div class="col-lg-3">
-                        <small><b>Transcripts/Certificates<span class="text-danger">*</span></b><br>
-                          Undergrad Transcripts/Certificates<span class="text-danger">*</span></small>
-                        <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
+
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <small><b>Transcripts/Certificates<span class="text-danger">*</span></b><br>
+                        Undergrad Transcripts/Certificates<span class="text-danger">*</span></small>
+                        <input type="file" name="cert_file">
+
+                    </div><!-- col -->
+                    <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                      <small><b>Degree<span class="text-danger">*</span></b><br>
+                        Undergraduate/Bachelors</small>                        
+                        <span style="color: red;"><input type="file" name="degree"></span>
+
                       </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Degree<span class="text-danger">*</span></b><br>
-                          Undergraduate/Bachelors</small>
-                        <label class="custom-file">
-                          <input type="file" id="file2" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>CV/Resume<span class="text-danger">*</span></b><br>
-                          Detailed CV/Resume</small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
-                          Two Letters of Recommendation</small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                    </div><!-- row --> 
+                    
+                    <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                      <small><b>CV/Resume<span class="text-danger">*</span></b><br>
+                        Detailed CV/Resume</small>
+                        <span style="color: red;"><input type="file" name="resume"></span>
+                    </div><!-- col -->
+                    <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                      <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
+                        Two Letters of Recommendation</small>
+                        <span style="color: red;"><input type="file" name="letter_recommend"></span>
+                    </div><!-- col -->
+                  </div><!-- row --> 
+                </form>
 
                     <div class="row">
                       <div class="col-lg-3">
                         <small><b>Age Requirement/Passport Copy<span class="text-danger">*</span></b><br>
                           Scanned copy (Front and Back of the Passport)<span class="text-danger">*</span></small>
-                        <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
+                          <span style="color: red;"><input type="file" name="passport"></span>
                       </div><!-- col -->
                       <div class="col-lg-3 mg-t-40 mg-lg-t-0">
                         <small><b>English Proficiency Requirement<span class="text-danger">*</span></b><br>
                           IELTS Scorecard/TOEFL Scorecard/Duolingo Scorecard/English Waiver Letter</small>
-                        <label class="custom-file">
-                          <input type="file" id="file2" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
+                          <span style="color: red;"><input type="file" name="eng_prof"></span>
                       </div><!-- col -->
                       
                       <div class="col-lg-3 mg-t-40 mg-lg-t-0">
                         <small><b>Digital Passport Photograph<span class="text-danger">*</span></b><br>
-                          Passport size photograph (White background)</small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
+                          <span style="color: red;"><input type="file" name="digi_pass"></span>
                       </div><!-- col -->
                       <div class="col-lg-3 mg-t-40 mg-lg-t-0">
                         <small><b>Personal Statement/SOP<span class="text-danger">*</span></b><br>
                           Statement of Purpose (500 Words)
                           </small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
-                      </div><!-- col -->
-                      <div class="col-lg-3 mg-t-40 mg-lg-t-0">
-                        <small><b>Letter of Recommendation<span class="text-danger">*</span></b><br>
-                          Two Letters of Recommendation
-                          </small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
+                          <span style="color: red;"><input type="file" name="sop"></span>
                       </div><!-- col -->
                       <div class="col-lg-3 mg-t-40 mg-lg-t-0">
                         <small><b>Additional Documents<span class="text-danger">*</span></b><br>
                           Combine all additional documents into one PDF
                           </small>
-                        <label class="custom-file">
-                          <input type="file" class="custom-file-input">
-                          <span class="custom-file-control custom-file-control-primary"></span>
-                        </label>
+                          <span style="color: red;"><input type="file" name="addition"></span>
                       </div><!-- col -->
                     </div><!-- row -->
                   </div>
@@ -238,25 +206,12 @@
             </div><!-- col-6 -->
           </div><!-- row -->
         </div><!-- card -->
-
-
-          {{-- Full texts
-          id	
-          sch_id	
-          user_id	
-          payable	
-          pmt_status	
-          status	
-          created_at	 --}}
                 
 
           <div class="row row-sm mg-t-20">
           <div class="col-12">
             <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-              {{-- <h6 class="card-body-title"></h6> --}}
-              {{-- <p class="mg-b-20 mg-sm-b-30"></p> --}}
-          <form action="{{ route('Applications.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
+              
               <div class="row">
                 <label class="col-sm-4 form-control-label">Username: <span class="tx-danger">*</span></label>
                 <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -294,13 +249,13 @@
                 </div>
               </div>
               <div class="form-layout-footer mg-t-30">
-                <button class="btn btn-info mg-r-5">Submit Application</button>
+                <button type="submit" class="btn btn-info mg-r-5">Submit Application</button>
                 <a href="{{ route('Applications.index') }}" class="btn btn-secondary">Cancel</a>
               </div><!-- form-layout-footer -->
-          </form>
             </div><!-- card -->
           </div><!-- col-6 -->
         </div><!-- row -->
+      </form>
 
       </div><!-- sl-pagebody -->
       @include('users.inc.footer')
@@ -378,6 +333,27 @@
 
 
       });
+    </script>
+    <script>
+      updateList = function() {
+  var input = document.getElementById('file');
+  var output = document.getElementById('fileList');
+  output.innerHTML = '<ul>';
+  for (var i = 0; i < input.files.length; ++i) {
+    output.innerHTML += '<small>' + input.files.item(i).name + '</small>';
+  }
+  output.innerHTML += '</ul>';
+}
+
+      updateList2 = function() {
+  var input2 = document.getElementById('file2');
+  var output2 = document.getElementById('fileList2');
+  output2.innerHTML = '<span>';
+  for (var i = 0; i < input2.files.length; ++i) {
+    output2.innerHTML += '<small>' + input2.files.item(i).name + '</small>';
+  }
+  output2.innerHTML += '</span>';
+}
     </script>
 
   </body>

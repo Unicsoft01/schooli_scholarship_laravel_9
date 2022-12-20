@@ -64,7 +64,7 @@ created_a	 --}}
                   <td>{{ number_format($application->payable) }}</td>
                 <td>{!! date('d-M-y', strtotime($application->created_at)) !!}</td>
                 
-                <td><a href="{{route('Applications.show', $application->sch_id.','.App\Models\User::find($application->user_id)->id)}}" class="btn btn-success rounded-10 btn-sm btn-small">More</a></td>
+                <td><a href="{{route('Applications.show', $application->sch_id.','.App\Models\User::find($application->user_id)->id)}}" class="btn btn-success rounded-10 btn-sm btn-small">View</a></td>
               </tr>
               @endforeach
             </tbody>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Applications;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AlertController;
 
 class ApplicationsController extends Controller
 {
@@ -36,17 +37,24 @@ class ApplicationsController extends Controller
      */
     public function store(Request $request)
     {
-        // sch_id	
-// pmt_status	
-// status	
-// "sch_name"
-// user_id
-// payable
-// sponsor
-// cert
-// pmt_proof
+
+// "":{},
+// "":{},
+// "":{},
+// "":{},
+// "":{},
+// "":{},
+// "":{},
+// "":{}}
+// 
 // return $request;
-       
+
+
+// $fileName = time().'.'.$request->file->extension();  
+
+// $request->file->move(public_path('uploads'), $fileName);
+
+
             $data['type'] = $request->cert;
             $data['sponsor'] = $request->sponsor;
             $data['sch_name'] = $request->sch_name;
@@ -55,17 +63,44 @@ class ApplicationsController extends Controller
             $data['status'] = "pending";
             $data['pmt_status'] = "pending";
             $data['user_id'] = $request->user_id;
-            // if($request->hasFile('image')){
-            //     $image = $request->file('image');
-            //     $filename = 'paypal_'.time().'.jpg';
-            //     $location = 'oldasset/images/' . $filename;
-            //     Image::make($image)->save($location);
-            //     $data['image'] = $filename;
-            // }
+
+            $cert_file = "cert_file".time().'.'.$request->cert_file->extension();  
+            $resume = "resume".time().'.'.$request->resume->extension();  
+            $letter_recommend = "letter_recommend".time().'.'.$request->letter_recommend->extension();  
+            $passport = "passport".time().'.'.$request->passport->extension();  
+            $eng_prof = "eng_prof".time().'.'.$request->eng_prof->extension();  
+            $sop = "sop".time().'.'.$request->sop->extension();  
+            $addition = "addition".time().'.'.$request->addition->extension();  
+            $pmt_proof = "pmt_proof".time().'.'.$request->pmt_proof->extension();  
+            $degree = "degree".time().'.'.$request->degree->extension();  
+         
+            $request->cert_file->move(public_path('uploads'), $cert_file);
+            $request->resume->move(public_path('uploads'), $resume);
+            $request->letter_recommend->move(public_path('uploads'), $letter_recommend);
+            $request->passport->move(public_path('uploads'), $passport);
+            $request->eng_prof->move(public_path('uploads'), $eng_prof);
+            $request->sop->move(public_path('uploads'), $sop);
+            $request->addition->move(public_path('uploads'), $addition);
+            $request->pmt_proof->move(public_path('uploads'), $pmt_proof);
+            $request->degree->move(public_path('uploads'), $degree);
+
+
+            $data['cert_file'] = $cert_file;
+            $data['resume'] = $resume;
+            $data['letter_recommend'] = $letter_recommend;
+            $data['passport'] = $passport;
+            $data['eng_prof'] = $eng_prof;
+            $data['sop'] = $sop;
+            $data['addition'] = $addition;
+            $data['pmt_proof'] = $pmt_proof;
+            $data['degree'] = $degree;
+
+
+
             $res = Applications::create($data);
             if ($res)
             {
-                return redirect()->route('Applications.index')->with('success', 'success');
+                return redirect()->route('Applications.index')->with(AlertController::SendAlert());
             }
             else
             {
@@ -136,5 +171,10 @@ class ApplicationsController extends Controller
         // return $id;
         $pageTitle = "Scholarship Application page";
         return view('users.my_applications', compact('pageTitle'));
+    }
+
+    public function download($file){
+        $file_path = public_path('uploads/'.$file);
+        return response()->download( $file_path);
     }
 }

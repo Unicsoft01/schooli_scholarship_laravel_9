@@ -134,7 +134,7 @@ Route::middleware(['auth:admin_guard'])->group(function () {
         Route::post('Scholarship/requirements', 'Req_store')->name('Req.store');
         
     });
-
+    Route::get('/download/{file}',[ApplicationsController::class, 'download'])->name('download');
 
 
 });

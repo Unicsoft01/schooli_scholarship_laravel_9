@@ -22,18 +22,6 @@
         <h6 class="card-body-title">Payments histories</h6>
         <p class="mg-b-20 mg-sm-b-30">You can search for payments Using any payment details eg: name, date</p>
 
-{{-- Full texts
-id	
-sch_id	
-user_id	
-sch_name	
-sponsor	
-type	
-payable	
-pmt_status	
-status	
-created_at	
-updated_at --}}
         <div class="table-wrapper">
           <table id="datatable1" class="table display responsive nowrap">
             <thead>
